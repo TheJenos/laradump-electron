@@ -2,7 +2,8 @@ const { app, BrowserWindow, protocol } = require('electron')
 const Store = require('electron-store');
 const url = require('url')
 const path = require('path')
-const { LiveServer } = require('laradump-server')
+const { LiveServer } = require('laradump-server');
+const { log } = require('console');
 const server = new LiveServer()
 const store = new Store();
 
@@ -16,10 +17,24 @@ function createWindow() {
       slashes: true
    }))
    win.setMenuBarVisibility(false)
+   server.startServer()
+   win.webContents.on('dom-ready', () => {
+      win.webContents.executeJavaScript('window.darkTheme=' + store.get('darkTheme'));
+      win.webContents.executeJavaScript('window.editor="' + store.get('editor') + '"');
+   });
+   win.webContents.on('did-finish-load', () => {
+      setInterval(async () => {
+         try {
+            const darkTheme = (await win.webContents.executeJavaScript('window.darkTheme')) || false
+            store.set('darkTheme', darkTheme)
+            const editor = (await win.webContents.executeJavaScript('window.editor')) || 'vscode'
+            store.set('editor', editor)
+         } catch (error) { }
+      }, 100);
+   });
    win.on('closed', () => {
       server.stopServer()
    })
-   server.startServer()
 }
 
 // app.on('ready', createWindow)
