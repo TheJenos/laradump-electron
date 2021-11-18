@@ -1,0 +1,33 @@
+{
+  "name": "laradump-electron",
+  "version": "0.0.2",
+  "description": "Laradump helps to debugging on laravel",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm run build-watch --prefix logger",
+    "start": "npm run build-watch --prefix logger & electron .",
+    "dev": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheJenos/laradump-electron.git"
+  },
+  "keywords": [
+    "laravel",
+    "laradump"
+  ],
+  "author": "thejenos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheJenos/laradump-electron/issues"
+  },
+  "homepage": "https://github.com/TheJenos/laradump-electron#readme",
+  "devDependencies": {
+    "electron": "^13.0.1"
+  },
+  "dependencies": {
+    "electron-store": "^8.0.1",
+    "laradump-server": "^1.0.2"
+  }
+}
