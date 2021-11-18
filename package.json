@@ -4,8 +4,9 @@
   "description": "Laradump helps to debugging on laravel",
   "main": "index.js",
   "scripts": {
-    "client": "npm run build-watch --prefix logger",
-    "start": "npm run build-watch --prefix logger & electron .",
+    "ui-dev": "node server && npm run dev --prefix laradump-ui",
+    "ui-build": "npm run build-watch --prefix laradump-ui",
+    "ui-build-start": "npm run build-watch --prefix laradump-ui & electron .",
     "dev": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
