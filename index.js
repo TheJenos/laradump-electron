@@ -1,4 +1,4 @@
-const { app, BrowserWindow, protocol } = require('electron')
+const { app, BrowserWindow, protocol, autoUpdater, dialog } = require('electron')
 const Store = require('electron-store');
 const url = require('url')
 const path = require('path')
@@ -39,6 +39,11 @@ function createWindow() {
 
 // app.on('ready', createWindow)
 
+const serverUrl = "https://laradump.vercel.app/"
+const updateUrl = `${serverUrl}/update/${process.platform}/${app.getVersion()}`
+autoUpdater.getFeedURL(updateUrl)
+
+
 app.on('ready', () => {
    protocol.interceptFileProtocol('file', (request, callback) => {
       const url = request.url.substr(7)    /* all urls start with 'file://' */
@@ -47,4 +52,18 @@ app.on('ready', () => {
       if (err) console.error('Failed to register protocol')
    })
    createWindow()
+})
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+   const dialogOpts = {
+      type: 'info',
+      buttons: ['Restart', 'Later'],
+      title: 'Application Update',
+      message: process.platform === 'win32' ? releaseNotes : releaseName,
+      detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+   }
+
+   dialog.showMessageBox(dialogOpts).then((returnValue) => {
+      if (returnValue.response === 0) autoUpdater.quitAndInstall()
+   })
 })

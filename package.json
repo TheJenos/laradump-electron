@@ -1,6 +1,6 @@
 {
   "name": "laradump-electron",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Laradump helps to debugging on laravel",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,11 @@
     "ui-build": "npm run build --emptyOutDir --prefix laradump-ui",
     "ui-build-start": "npm run build-watch --prefix laradump-ui & electron .",
     "dev": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=logo.png --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=logo.png --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Shopping List\"",
+    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=logo.png --prune=true --out=release-builds",
+    "package-all": "electron-packager . --all --overwrite --asar=true --icon=logo.png --prune=true --out=release-builds"
   },
   "repository": {
     "type": "git",
@@ -28,7 +32,14 @@
     "electron": "^13.0.1"
   },
   "dependencies": {
+    "electron-builder": "^22.14.5",
     "electron-store": "^8.0.1",
     "laradump-server": "^1.0.2"
+  },
+  "build": {
+    "appId": "thejenos.laradump.laradump",
+    "mac": {
+      "category": "public.app-category.productivity"
+    }
   }
 }
