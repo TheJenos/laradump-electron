@@ -26,6 +26,7 @@ jobs:
 
       - run: cd laradump-ui && rm package-lock.json
       - run: cd laradump-ui && npm install
+      - run: npm install -g sass
       - run: rm package-lock.json
       - run: npm install
       - run: npm run ui-build
