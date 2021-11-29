@@ -18,6 +18,11 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
+      - name: Git Sumbodule Update
+        run: |
+          git pull --recurse-submodules
+          git submodule update --remote --recursive
+
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
