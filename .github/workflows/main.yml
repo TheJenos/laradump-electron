@@ -22,7 +22,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14
 
       - run: cd laradump-ui && rm package-lock.json
       - run: cd laradump-ui && npm install
