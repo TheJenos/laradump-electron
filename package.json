@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/TheJenos/laradump-electron#readme",
   "devDependencies": {
-    "electron": "^13.0.1"
+    "electron": "^13.0.1",
+    "electron-builder": "^22.10.5"
   },
   "dependencies": {
-    "electron-builder": "^22.10.5",
     "electron-store": "^8.0.1",
     "laradump-server": "^1.0.2"
   },
