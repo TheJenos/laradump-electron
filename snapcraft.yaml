@@ -1,5 +1,6 @@
 name: 'laradump'
 description: 'Laravel dumping tool'
+summary: 'Laravel dumping tool'
 base: core18
 grade: stable
 confinement: strict
