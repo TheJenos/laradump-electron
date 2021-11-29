@@ -24,6 +24,8 @@ jobs:
         with:
           node-version: 10
 
+      - run: cd laradump-ui && rm package-lock.json
+      - run: rm package-lock.json
       - run: npm install --prefix laradump-ui
       - run: npm install
       - run: npm run ui-build
